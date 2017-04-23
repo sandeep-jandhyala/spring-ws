@@ -1,0 +1,54 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+                  name="ComplaintService"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:tns="http://localhost:8084/complaints/ComplaintService"
+                  xmlns:s="http://localhost:8084/complaints/ComplaintService/schemas"
+                  targetNamespace="http://localhost:8084/complaints/ComplaintService">
+ 
+   
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://localhost:8084/complaints/ComplaintService/schemas">
+            <xsd:import namespace="http://localhost:8084/complaints/ComplaintService/schemas" schemaLocation="ComplaintRequest.xsd"/>
+        </xsd:schema>
+</wsdl:types>
+    
+    <wsdl:message name="ComplaintRequest">
+        <wsdl:part element="s:ComplaintRequest" name="body"/>
+    </wsdl:message>
+	
+    <wsdl:message name="ComplaintResponse">
+        <wsdl:part element="s:ComplaintResponse" name="body"/>
+    </wsdl:message>
+
+    <wsdl:portType name="Complaint_PortType">
+        <wsdl:operation name="registerComplaint">
+            <wsdl:input message="tns:ComplaintRequest"/>
+            <wsdl:output message="tns:ComplaintResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="Complaint_Binding" type="tns:Complaint_PortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="registerComplaint">
+            <soap:operation soapAction="registerComplaint"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+		
+            <wsdl:output >
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="ComplaintService">
+        <wsdl:documentation>WSDL File for ComplaintService</wsdl:documentation>
+        <wsdl:port binding="tns:Complaint_Binding" name="Complaint_Port">
+            <soap:address
+                location="http://localhost:8084/complaints-ws/soap/ComplaintsWebService.wsdl" />
+        </wsdl:port>
+    </wsdl:service>
+    
+    
+</wsdl:definitions>
