@@ -1,4 +1,6 @@
-SOAP
+This project has a webservice endpoint in both SOAP and REST 
+
+SOAP Endpoint details 
 
 http://localhost:8084/complaints-ws/soap/ComplaintsWebService.wsdl  
 
